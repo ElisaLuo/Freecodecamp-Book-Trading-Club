@@ -1,0 +1,32 @@
+<% include header.ejs %>
+<% include nav.ejs %>
+<div class = "ui container">
+    <h1>Books</h1>
+    <form>
+      <input type="text" name="search" placeholder="Search..">
+    </form>
+    <% for(var i = 0; i < info.length; i++){ %>
+    <div class="ui grid">
+        <div class="column four wide">
+            <div class="ui card">
+                <div class="content">
+                    <img src = "<%= info[i].thumbnail %>" style="margin-bottom: 10px"/>
+                    <div class="header">
+                        <h1 class="ui small header title"><%= info[i].title %></h1>
+                    </div>
+                </div>
+                <div class="content">
+                    <p>Author: <%= info[i].authors[0] %></p>
+                    <p>Published on: <%= info[i].publishedDate %></p>
+                    <p>Pages: <%= info[i].pageCount %></p>
+                </div>
+                <div class="content extra">
+                    <button class="ui button" type="button" name="button">Read More</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% } %>
+</div>
+
+<% include footer.ejs %>
