@@ -9,6 +9,7 @@ const login = require('./routes/login');
 const signUp = require('./routes/signup');
 const logout = require('./routes/logout');
 const books = require('./routes/books');
+const path = require('path');
 
 process.env.NODE_ENV = 'production';
 
@@ -20,8 +21,9 @@ db.once('open', function () {
   console.log('Connection to the database successful');
 });
 
+//Has to set serve static so the files in the public folder would be uploaded onto the site
+app.use(express.static(path.join(__dirname, 'public')));
 //Sets up local cookie (see https://www.npmjs.com/package/client-sessions)
-app.use(express.static('public'));
 app.use(session({
   cookieName: 'session',
   secret: 'aewoiv0923lkcvxio2xd08f3wh',
@@ -31,6 +33,7 @@ app.use(session({
 app.set('port', process.env.PORT || process.env.IP );
 app.set('view engine', 'ejs');
 
+app.use(express.static(path.join(__dirname, '/public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
