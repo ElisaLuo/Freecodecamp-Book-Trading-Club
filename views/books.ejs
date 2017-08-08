@@ -2,26 +2,30 @@
 <% include nav.ejs %>
 <div class = "ui container">
     <h1>Books</h1>
-    <form>
-      <input type="text" name="search" placeholder="Search..">
+    <form action="/" method="POST">
+      <input type="text" name="search" placeholder="Search.." required>
+      <input type="submit" value="Search">
     </form>
     <% for(var i = 0; i < info.length; i++){ %>
     <div class="ui grid">
         <div class="column four wide">
             <div class="ui card">
+                <div class="image">
+                    <img src = "<%= info[i].thumbnail %>"/>
+                </div>
                 <div class="content">
-                    <img src = "<%= info[i].thumbnail %>" style="margin-bottom: 10px"/>
                     <div class="header">
                         <h1 class="ui small header title"><%= info[i].title %></h1>
                     </div>
-                </div>
-                <div class="content">
-                    <p>Author: <%= info[i].authors[0] %></p>
-                    <p>Published on: <%= info[i].publishedDate %></p>
-                    <p>Pages: <%= info[i].pageCount %></p>
+                    <div class="meta">
+                        <p>Author: <%= info[i].authors %></p>
+                        <p>Published on: <%= info[i].publishedDate %></p>
+                        <p>Pages: <%= info[i].pageCount %></p>
+                    </div>
                 </div>
                 <div class="content extra">
-                    <button class="ui button" type="button" name="button">Read More</button>
+                    <button class="ui button fluid">View Detail</button>
+                    <button class="ui button fluid" type="button" name="button">Borrow</button>
                 </div>
             </div>
         </div>

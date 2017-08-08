@@ -1,4 +1,56 @@
 <% include header.ejs %>
 <% include nav.ejs %>
+<div style="position: fixed; z-index: -1">
+      <img class="mySlides w3-animate-fading" src="https://static.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg" style="width:100%">
+      <img class="mySlides w3-animate-fading" src="https://cdn.pixabay.com/photo/2017/01/06/23/21/soap-bubble-1959327_1280.jpg" style="width:100%">
+      <img class="mySlides w3-animate-fading" src="http://s1.1zoom.net/big7/392/Pictorial_art_Autumn_427595.jpg" style="width:100%">
+      <img class="mySlides w3-animate-fading" src="https://mota.ru/upload/wallpapers/source/2015/01/07/16/02/42514/004.jpg" style="width:100%">
+    </div>
+<div class="ui container">
+    <div class="hero">
+        <div class="hero-inner-wrapper">
+            <h1>Welcome to the FFC book trading club!</h1>
+            <h1>Find books about anything!</h1>
+        </div>
+    </div>
+    <div class="info-boxes">
+        <div class="info-box-wrapper">
+            <div class="info-box-content">
+                <h3>Search and add</h3>
+            </div>
+        </div>
+        <div class="info-box-wrapper">
+            <div class="info-box-content">
+                <h3>Search and add</h3>
+            </div>
+        </div>
+        <div class="info-box-wrapper">
+            <div class="info-box-content">
+                <h3>Search and add</h3>
+            </div>
+        </div>
+        <div class="info-box-wrapper">
+            <div class="info-box-content">
+                <h3>Search and add</h3>
+            </div>
+        </div>
+    </div>
+</div>
 
+<script>
+    var myIndex = 0;
+    carousel();
+    
+    function carousel() {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        for (i = 0; i < x.length; i++) {
+           x[i].style.display = "none";  
+        }
+        myIndex++;
+        if (myIndex > x.length) {myIndex = 1}    
+        x[myIndex-1].style.display = "block";  
+        setTimeout(carousel, 8000);    
+    }
+</script>
 <% include footer.ejs %>

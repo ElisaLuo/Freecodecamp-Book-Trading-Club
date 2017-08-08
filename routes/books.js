@@ -5,16 +5,27 @@ const router = express.Router();
 var options = {
     limit: 40
 };
-
-books.search("Professional JavaScript for Web Developers", options, function(error, results, apiResponse) {
-    if ( ! error ) {
-        router.get('/', function (req, res) {
+router.get('/', function (req, res) {
+    books.search("javascript", options, function(error, results) {
+        if ( ! error ) {
             res.render('books',{info: results});
-        });
-        //console.log(results);
-    } else {
-        console.log(error);
-    }
+        }
+        else {
+            console.log(error);
+        }
+    });
 });
+
+router.post('/', function (req, res) {
+    books.search(req.body.search, options, function(error, results) {
+        if ( ! error ) {
+            res.render('books',{info: results});
+        }
+        else {
+            console.log(error);
+        }
+    });
+});
+
 
 module.exports = router;
