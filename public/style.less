@@ -10,10 +10,11 @@ input[type=text] {
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 2px;
+    align: center;
     transition: width 0.6s ease-in-out;
 }
 input[type=text]:focus {
-    width: 100%;
+    width: 90%;
 }
 .title{
     overflow: hidden;
@@ -29,7 +30,6 @@ input[type=text]:focus {
 .hero {
     color: #fff;
     padding-top: 30vh;
-    padding-left: 7vw;
     position: absolute;
 }
 .hero-inner-wrapper{
@@ -51,6 +51,7 @@ input[type=text]:focus {
 .info-box-wrapper{
     width: 100%;
     height: 100%;
+    position: relative;
     background: rgba(6,24,33,.6);
     justify-content: flex-start;
     padding: 10px 26px;
@@ -58,7 +59,28 @@ input[type=text]:focus {
     box-sizing: border-box;
     transition: all .35s ease-in-out;
     &:hover{
-        width: 80%;
+        right: 50px;
         background-color: rgba(63, 191, 191, 0.5);
     }
+}
+.page-hero {
+    padding: 350px 0 110px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    overflow: hidden;
+    text-align: center;
+    position: relative;
+    transition: all .35s ease-in-out;
+}
+#browseh{
+    font-size: 50px;
+    color: white;
+    margin-top: -150px;
+}
+#scrollup{
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    transition: all .35s ease-in-out;
 }
