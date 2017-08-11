@@ -1,4 +1,28 @@
 <% include header.ejs %>
 <% include nav.ejs %>
-
+<div class="page-hero" style="background-image: url('rose.jpg'); width: 100%;"><!-- only uses a.jpg instead of ../public/a.jpg because the express serve static uploaded the public folder's files onto the site already (check https://book-club-elisal.c9users.io/a.jpg) -->
+    <h1 id="eachTitle">SIGN UP</h1>
+</div>
+<div class="ui container">
+    <form class="ui form log-form" method="POST" action="">
+        <div class="field">
+            <input required type="text" name="username" placeholder="Username" class="log" autofocus>
+        </div>
+        <div class="field">
+            <input required type="text" name="password" placeholder="Password" class="log">
+        </div>
+        <div class="field">
+            <input required type="text" name="email" placeholder="Email" class="log">
+        </div>
+        <div class="field">
+            <input required type="text" name="place" placeholder="Location" class="log">
+        </div>
+        <div class="field">
+            <% if(error){ %>
+                <p><%=errorMessage%></p>
+            <% } %>
+        </div>
+        <button class="ui basic button fluid submit" type="submit">Sign up</button>
+    </form>
+</div>
 <% include footer.ejs %>

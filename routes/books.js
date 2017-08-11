@@ -6,26 +6,26 @@ var options = {
     limit: 40
 };
 router.get('/', function (req, res) {
-    books.search("javascript", options, function(error, results) {
-        if ( ! error ) {
-            res.render('books',{info: results});
-        }
-        else {
-            console.log(error);
-        }
-    });
+    if (req.session && req.session.user) {
+        books.search("javascript", options, function(error, results) {
+            if ( ! error ) {
+                res.render('books',{info: results, authenticated: true});
+            }
+            else {
+                console.log(error);
+            }
+        });
+    }
+    else{
+        books.search("javascript", options, function(error, results) {
+            if ( ! error ) {
+                res.render('books',{info: results, authenticated: false});
+            }
+            else {
+                console.log(error);
+            }
+        });
+    }
 });
-
-router.post('/', function (req, res) {
-    books.search(req.body.search, options, function(error, results) {
-        if ( ! error ) {
-            res.render('books',{info: results});
-        }
-        else {
-            console.log(error);
-        }
-    });
-});
-
 
 module.exports = router;

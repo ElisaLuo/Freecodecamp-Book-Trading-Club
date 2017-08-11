@@ -9,6 +9,7 @@ const login = require('./routes/login');
 const signUp = require('./routes/signup');
 const logout = require('./routes/logout');
 const books = require('./routes/books');
+const profile = require('./routes/profile');
 const path = require('path');
 
 process.env.NODE_ENV = 'production';
@@ -40,6 +41,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //Sets up links for different sites
 app.use("/", index);
 app.use("/books", books);
+app.use("/profile", profile);
 app.use("/login", login);
 app.use("/signup", signUp);
 app.use("/logout", logout); //Creates link for logout so function could be run

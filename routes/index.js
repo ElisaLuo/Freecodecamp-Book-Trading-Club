@@ -1,10 +1,19 @@
-const books = require("google-books-search");
 const express = require('express');
 const router = express.Router();
 const User = require('../models/users.model');
 
+
 router.get('/', function (req, res) {
-    res.render('index');
+    if (req.session && req.session.user) {
+        User.findOne({ username: req.session.user.username }, function (err, user) {
+            res.locals.user = user || req.session.user;
+            res.render('index', { authenticated: true });
+        });
+    } else {
+        res.locals.authenticated = false;
+        res.render('index');
+    }
+
 });
 
 /*var options = {
