@@ -20,7 +20,31 @@ crossorigin="anonymous"></script>
     </div>
     
     <div class="ui bottom attached tab segment active" data-tab="requested">
-        This is some text
+        <% for(var i = 0; i < info.length; i++){ %>
+    <div class="ui grid">
+        <div class="column four wide">
+            <div class="ui card">
+                <div class="image">
+                    <img src = "<%= info[i].thumbnail %>"/>
+                </div>
+                <div class="content">
+                    <div class="header">
+                        <h1 class="ui small header title"><%= info[i].title %></h1>
+                    </div>
+                    <div class="meta">
+                        <p>Author: <%= info[i].author %></p>
+                        <p>Published on: <%= info[i].publishedDate %></p>
+                        <p>Pages: <%= info[i].pageCount %></p>
+                    </div>
+                </div>
+                <div class="content extra">
+                    <button class="ui button fluid">View Detail</button>
+                    <button class="ui button fluid" type="button" name="button">Borrow</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% } %>
     </div>
     <div class="ui bottom attached tab segment" data-tab="borrowed">
         This is some text

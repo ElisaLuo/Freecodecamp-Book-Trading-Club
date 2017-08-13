@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/users.model');
 const Book = require('../models/books.model');
+var myBooks = [];
 
 var options = {
     limit: 40
@@ -10,21 +11,18 @@ var options = {
 
 router.get('/', function (req, res) {
     if (req.session && req.session.user) {
-        Book.find({ owner: req.session.user.username || req.session.user }, function(err, book){
+        Book.find({ owner: req.session.user.username || req.session.user }, function(err, books){
             if(err){
                 console.log(err);
             }
-            books.search("javascript", options, function(error, results) {
-                if ( ! error ) {
-                    res.render("profile",{
-                        authenticated: true,
-                        info: books,
-                        results: results
-                    });
-                }
-                else {
-                    console.log(error);
-                }
+            myBooks = [];
+            for(var i = 0; i < books.length; i++){
+                myBooks.push(books[i].bookInfo);
+            }
+            myBooks = myBooks.filter(Boolean);
+            res.render("profile",{
+                authenticated: true,
+                info: myBooks,
             });
             
         });
@@ -34,30 +32,5 @@ router.get('/', function (req, res) {
         res.status(401).send('You must be logged in to access this page');
     }
 });
-router.post('/', function(req, res){
-    if(req.session && req.session.user){
-        Book.find({ owner: req.session.user.username || req.session.user }, function(err, book){
-            if(err){
-                console.log(err);
-            }
-            books.search(req.body.search, options, function(error, results) {
-                if ( ! error ) {
-                    console.log(req.body);
-                    res.render("profile",{
-                        authenticated: true,
-                        info: books,
-                        results: results
-                    });
-                }
-                else {
-                    console.log(error);
-                }
-            });
-            
-        });
-    }
-    else{
-        res.status(401).send('You must be logged in to access this page');
-    }
-})
+
 module.exports = router;
