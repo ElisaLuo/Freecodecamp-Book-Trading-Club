@@ -1,3 +1,10 @@
+<head>
+    <script
+src="http://code.jquery.com/jquery-3.2.1.js"
+integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+</head>
 <% include header.ejs %>
 <% include nav.ejs %>
 <div class="page-hero" style="background-image: url('004.jpg'); width: 100%;"><!-- only uses a.jpg instead of ../public/a.jpg because the express serve static uploaded the public folder's files onto the site already (check https://book-club-elisal.c9users.io/a.jpg) -->
@@ -5,53 +12,14 @@
 </div>
 <div class="ui container">
     <div class="ui top attached tabular menu">
-        <a class="item active" data-tab="add">Add Book</a>
-        <a class="item" data-tab="mine">My Books</a>
+        <a class="item active" data-tab="mine">My Books</a>
         <a class="item" data-tab="requested">Requested Books</a>
         <a class="item" data-tab="borrowed">Borrowed Books</a>
         <a class="item" data-tab="requestes">Requestes For You</a>
         <a class="item" data-tab="lent">Lent Books</a>
     </div>
-    <div class="ui bottom attached tab segment" data-tab="add">
-        <form method="POST">
-            <input type="text" name="search" placeholder="Search..." required class="searchBook">
-            <input type="submit" value="Search">
-        </form>
-        <% for(var i = 0; i < results.length; i++){ %>
-            <div class="ui grid">
-                <div class="column four wide">
-                    <div class="ui card">
-                        <div class="image">
-                            <img src = "<%= results[i].thumbnail %>"/>
-                        </div>
-                        <div class="content">
-                            <div class="header">
-                                <h1 class="ui small header title"><%= results[i].title %></h1>
-                            </div>
-                            <div class="meta">
-                                <p>Author: <%= results[i].authors %></p>
-                                <p>Published on: <%= results[i].publishedDate %></p>
-                                <p>Pages: <%= results[i].pageCount %></p>
-                            </div>
-                        </div>
-                        <div class="content extra">
-                            <button class="ui button fluid" id="detail">View Detail</button>
-                            <button class="ui button fluid" type="button" name="button">Add</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="modaldiv" class="ui modal" style="position: relative">
-                <i class="close icon"></i>
-                <div class="header"><%=results[i].title%></div>
-                <div class="content"><%=results[i].description%></div>
-                <div class="actions">
-                    <div class="ui button">Delete</div>
-                </div>
-            </div><!-- Should be out side of the book info div -->
-        <% } %>
-    </div>
-    <div class="ui bottom attached tab segment" data-tab="requested">
+    
+    <div class="ui bottom attached tab segment active" data-tab="requested">
         This is some text
     </div>
     <div class="ui bottom attached tab segment" data-tab="borrowed">
@@ -68,14 +36,11 @@
     </div>
 </div>
 <% include footer.ejs%>
-<script
-src="http://code.jquery.com/jquery-3.2.1.js"
-integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
-crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+
   <script type="text/javascript">
   $(document).ready(function(){
     $(document).on('click', '#detail', function(){
+        alert($(this).attr("class"));
         $('.ui.modal').modal({
             blurring: true
           }).modal('show');

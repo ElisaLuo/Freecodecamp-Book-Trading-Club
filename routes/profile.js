@@ -5,7 +5,7 @@ const User = require('../models/users.model');
 const Book = require('../models/books.model');
 
 var options = {
-    limit: 1
+    limit: 40
 };
 
 router.get('/', function (req, res) {
@@ -34,5 +34,30 @@ router.get('/', function (req, res) {
         res.status(401).send('You must be logged in to access this page');
     }
 });
-
+router.post('/', function(req, res){
+    if(req.session && req.session.user){
+        Book.find({ owner: req.session.user.username || req.session.user }, function(err, book){
+            if(err){
+                console.log(err);
+            }
+            books.search(req.body.search, options, function(error, results) {
+                if ( ! error ) {
+                    console.log(req.body);
+                    res.render("profile",{
+                        authenticated: true,
+                        info: books,
+                        results: results
+                    });
+                }
+                else {
+                    console.log(error);
+                }
+            });
+            
+        });
+    }
+    else{
+        res.status(401).send('You must be logged in to access this page');
+    }
+})
 module.exports = router;

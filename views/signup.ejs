@@ -6,23 +6,35 @@
 <div class="ui container">
     <form class="ui form log-form" method="POST" action="">
         <div class="field">
-            <input required type="text" name="username" placeholder="Username" class="log" autofocus>
+            <div class="ui left icon input">
+                <i aria-hidden="true" class='user icon'></i>
+                <input required type="text" name="username" placeholder="Username" class="log" autofocus>
+            </div>
         </div>
         <div class="field">
-            <input required type="text" name="password" placeholder="Password" class="log">
+            <div class="ui left icon input">
+                <i aria-hidden="true" class='lock icon'></i>
+                <input required type="text" name="password" placeholder="Password" class="log">
+            </div>
         </div>
         <div class="field">
-            <input required type="text" name="email" placeholder="Email" class="log">
+            <div class="ui left icon input">
+                <i aria-hidden="true" class='open envelope icon'></i>
+                <input required type="text" name="email" placeholder="Email" class="log">
+            </div>
         </div>
         <div class="field">
-            <input required type="text" name="place" placeholder="Location" class="log">
+            <div class="ui left icon input">
+                <i aria-hidden="true" class='marker icon'></i>
+                <input required type="text" name="place" placeholder="Location" class="log">
+            </div>
         </div>
         <div class="field">
             <% if(error){ %>
                 <p><%=errorMessage%></p>
             <% } %>
         </div>
-        <button class="ui basic button fluid submit" type="submit">Sign up</button>
+        <button class="ui basic blue button fluid submit" type="submit">Sign up</button>
     </form>
 </div>
 <% include footer.ejs %>

@@ -10,6 +10,7 @@ const signUp = require('./routes/signup');
 const logout = require('./routes/logout');
 const books = require('./routes/books');
 const profile = require('./routes/profile');
+const addBook = require('./routes/add');
 const path = require('path');
 
 process.env.NODE_ENV = 'production';
@@ -30,16 +31,17 @@ app.use(session({
   secret: 'aewoiv0923lkcvxio2xd08f3wh',
   duration: 24 * 60 * 60 * 1000
 }));
-
+app.use(bodyParser.urlencoded({ extended: true }));
 app.set('port', process.env.PORT || process.env.IP );
 app.set('view engine', 'ejs');
 
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+
 
 //Sets up links for different sites
 app.use("/", index);
+app.use("/add", addBook);
 app.use("/books", books);
 app.use("/profile", profile);
 app.use("/login", login);

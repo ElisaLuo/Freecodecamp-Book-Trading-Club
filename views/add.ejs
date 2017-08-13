@@ -1,0 +1,66 @@
+<head>
+    <script
+src="https://code.jquery.com/jquery-3.2.1.js"
+integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+crossorigin="anonymous"></script>
+  <script src="home.js" ></script> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+</head>
+<% include header.ejs %>
+<% include nav.ejs %>
+<div class="page-hero" style="background-image: url('004.jpg'); width: 100%;"><!-- only uses a.jpg instead of ../public/a.jpg because the express serve static uploaded the public folder's files onto the site already (check https://book-club-elisal.c9users.io/a.jpg) -->
+    <h1 id="eachTitle">ADD BOOK</h1>
+</div>
+<div class="ui container">
+    <form method="POST">
+        <input type="text" name="search" placeholder="Search..." required class="searchBook">
+        <input type="submit" value="Search">
+    </form>
+    <% for(var i = 0; i < results.length; i++){ %>
+        <div class="ui grid">
+            <div class="column four wide">
+                <div class="ui card">
+                    <div class="image">
+                        <img src = "<%= results[i].thumbnail %>"/>
+                    </div>
+                    <div class="content">
+                        <div class="header">
+                            <h1 class="ui small header title" name="title"><%= results[i].title %></h1>
+                        </div>
+                        <div class="meta">
+                            <p>Author: <%= results[i].authors %></p>
+                            <p>Published on: <%= results[i].publishedDate %></p>
+                            <p>Pages: <%= results[i].pageCount %></p>
+                        </div>
+                    </div>
+                    <div class="content extra">
+                        <button class="detail ui button fluid" id="<%= results[i].title %>">View Detail</button>
+                        <input class="ui button fluid add" type="submit" name="button" id="<%= results[i].title %>">Add</input>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="modaldiv" class="ui modal" style="position: relative">
+            <i class="close icon"></i>
+            <div class="header"><%=results[i].title%></div>
+            <div class="content"><%=results[i].description%></div>
+        </div><!-- Should be out side of the book info div -->
+    <% } %>
+    
+</div>
+        
+
+    <% include footer.ejs%>
+<script type="text/javascript">
+  /*$(document).ready(function(){
+    $(document).on('click', '#detail', function(){
+        alert($(this).attr("class"));
+        $('.ui.modal').modal({
+            blurring: true
+          }).modal('show');
+    });
+    $('.top.menu .item').tab();
+})*/
+  </script>
+  </body>
+</html>
