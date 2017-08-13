@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/users.model');
 const Book = require('../models/books.model');
+var term = [];
 
 var options = {
     limit: 40
@@ -21,8 +22,23 @@ router.get('/', function (req, res) {
     }
 });
 router.post("/", function(req,res){
-    console.log(res.body);
-        books.search(req.body.search, options, function(error, results) {
+    term.push(req.body.search);
+    term = term.filter(Boolean);
+    console.log(term);
+    const newBook = new Book({
+        bookInfo:{
+            thumbnail: req.body.image,
+            title: req.body.title,
+            author: req.body.author,
+            publishedDate: req.body.date,
+            pageCount: req.body.pages,
+            description: req.body.description
+        },
+        owner: req.session.user.username
+    }).save(function (err, poll) {
+        if (err) throw err;
+    });
+        books.search(term[term.length - 1], options, function(error, results) {
             if ( ! error ) {
                 res.render("add",{
                     authenticated: true,
