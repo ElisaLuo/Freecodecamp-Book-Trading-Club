@@ -12,7 +12,14 @@ router.get('/', function (req, res) {
                 console.log(err);
             }
             for(var i = 0; i < books.length; i++){
-                bookInfo.push(books[i].bookInfo);
+                bookInfo.push({
+                    thumbnail: books[i].thumbnail,
+                    title: books[i].title,
+                    author: books[i].author,
+                    publishedDate: books[i].publishedDate,
+                    pageCount: books[i].pageCount,
+                    description: books[i].description,
+                });
             }
             res.render('books', {
                 authenticated: true,
@@ -24,7 +31,14 @@ router.get('/', function (req, res) {
         bookInfo = [];
         Book.find({}, function(err, books){
             for(var i = 0; i < books.length; i++){
-                bookInfo.push(books[i].bookInfo);
+                bookInfo.push({
+                    thumbnail: books[i].thumbnail,
+                    title: books[i].title,
+                    author: books[i].author,
+                    publishedDate: books[i].publishedDate,
+                    pageCount: books[i].pageCount,
+                    description: books[i].description
+                });
             }
             res.render('books', {
                 authenticated: false,
@@ -34,4 +48,35 @@ router.get('/', function (req, res) {
     }
 });
 
+router.post("/", function(req, res){
+    Book.findOneAndUpdate({title: req.body.title},    
+        {
+            status: "borrowed",
+            requestedBy: req.session.user.username
+        },
+        {new: true},
+        function(err, book){
+            if(err){
+                console.log(err);
+            }
+        }
+    );
+    console.log(req.body.title);
+    Book.find({}, function(err, books){
+            for(var i = 0; i < books.length; i++){
+                bookInfo.push({
+                    thumbnail: books[i].thumbnail,
+                    title: books[i].title,
+                    author: books[i].author,
+                    publishedDate: books[i].publishedDate,
+                    pageCount: books[i].pageCount,
+                    description: books[i].description
+                });
+            }
+            res.render('books', {
+                authenticated: true,
+                info: bookInfo
+            })
+        })
+})
 module.exports = router;

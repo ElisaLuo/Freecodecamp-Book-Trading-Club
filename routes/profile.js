@@ -17,7 +17,14 @@ router.get('/', function (req, res) {
             }
             myBooks = [];
             for(var i = 0; i < books.length; i++){
-                myBooks.push(books[i].bookInfo);
+                myBooks.push({
+                    thumbnail: books[i].thumbnail,
+                    title: books[i].title,
+                    author: books[i].author,
+                    publishedDate: books[i].publishedDate,
+                    pageCount: books[i].pageCount,
+                    description: books[i].description,
+                });
             }
             myBooks = myBooks.filter(Boolean);
             res.render("profile",{

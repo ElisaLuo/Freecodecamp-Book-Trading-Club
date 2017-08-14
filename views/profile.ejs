@@ -11,7 +11,7 @@
         <a class="item" data-tab="requestes">Requestes For You</a>
         <a class="item" data-tab="lent">Lent Books</a>
     </div>
-    <div class="ui bottom attached tab segment" data-tab="mine">
+    <div class="ui bottom attached tab segment active" data-tab="mine">
         <% for(var i = 0; i < info.length; i++){ %>
         <div class="ui grid">
             <div class="column four wide">
@@ -31,7 +31,7 @@
                     </div>
                     <div class="content extra">
                         <button class="ui button fluid">View Detail</button>
-                        <button class="ui button fluid" type="button" name="button">Borrow</button>
+                        <button class="ui button fluid" type="button" name="button">Delete</button>
                     </div>
                 </div>
             </div>

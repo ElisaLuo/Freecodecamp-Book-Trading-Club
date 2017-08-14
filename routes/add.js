@@ -30,14 +30,12 @@ router.post("/", function(req,res){
         
     }else{
         const newBook = new Book({
-            bookInfo:{
-                thumbnail: req.body.image,
-                title: req.body.title,
-                author: req.body.author,
-                publishedDate: req.body.date,
-                pageCount: req.body.pages,
-                description: req.body.description
-            },
+            thumbnail: req.body.image,
+            title: req.body.title,
+            author: req.body.author,
+            publishedDate: req.body.date,
+            pageCount: req.body.pages,
+            description: req.body.description,
             owner: req.session.user.username
         }).save(function (err, poll) {
             if (err) throw err;
