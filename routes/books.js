@@ -7,7 +7,7 @@ var bookInfo = [];
 router.get('/', function (req, res) {
     bookInfo = [];
     if (req.session && req.session.user) {
-        Book.find({owner: {$ne: req.session.user.username}}, function(err, books){
+        Book.find({owner: {$ne: req.session.user.username}, requestedBy: "", borrowedBy: ""}, function(err, books){
             if(err){
                 console.log(err);
             }
@@ -51,7 +51,7 @@ router.get('/', function (req, res) {
 router.post("/", function(req, res){
     Book.findOneAndUpdate({title: req.body.title},    
         {
-            status: "borrowed",
+            status: "requested",
             requestedBy: req.session.user.username
         },
         {new: true},
