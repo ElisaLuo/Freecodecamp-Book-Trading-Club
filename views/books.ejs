@@ -24,7 +24,9 @@
                 </div>
                 <div class="content extra">
                     <button class="ui button fluid">View Detail</button>
-                    <button class="ui button fluid" type="button" name="button">Borrow</button>
+                    <% if(authenticated){ %>
+                        <button class="ui button fluid" type="button" name="button">Borrow</button>
+                    <% } %>
                 </div>
             </div>
         </div>

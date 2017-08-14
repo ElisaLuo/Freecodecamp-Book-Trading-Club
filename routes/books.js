@@ -7,7 +7,10 @@ var bookInfo = [];
 router.get('/', function (req, res) {
     bookInfo = [];
     if (req.session && req.session.user) {
-        Book.find({}, function(err, books){
+        Book.find({owner: {$ne: req.session.user.username}}, function(err, books){
+            if(err){
+                console.log(err);
+            }
             for(var i = 0; i < books.length; i++){
                 bookInfo.push(books[i].bookInfo);
             }
