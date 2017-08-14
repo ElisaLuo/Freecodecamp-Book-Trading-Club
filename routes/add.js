@@ -24,31 +24,36 @@ router.get('/', function (req, res) {
 router.post("/", function(req,res){
     term.push(req.body.search);
     term = term.filter(Boolean);
-    console.log(term);
-    const newBook = new Book({
-        bookInfo:{
-            thumbnail: req.body.image,
-            title: req.body.title,
-            author: req.body.author,
-            publishedDate: req.body.date,
-            pageCount: req.body.pages,
-            description: req.body.description
-        },
-        owner: req.session.user.username
-    }).save(function (err, poll) {
-        if (err) throw err;
-    });
-        books.search(term[term.length - 1], options, function(error, results) {
-            if ( ! error ) {
-                res.render("add",{
-                    authenticated: true,
-                    info: books,
-                    results: results
-                });    
-            }
-            else {
-                console.log(error);
-            }
+    console.log(req.body.title == undefined);
+    if(req.body.title == undefined){
+        console.log("a");
+        
+    }else{
+        const newBook = new Book({
+            bookInfo:{
+                thumbnail: req.body.image,
+                title: req.body.title,
+                author: req.body.author,
+                publishedDate: req.body.date,
+                pageCount: req.body.pages,
+                description: req.body.description
+            },
+            owner: req.session.user.username
+        }).save(function (err, poll) {
+            if (err) throw err;
         });
+    }
+    books.search(term[term.length - 1], options, function(error, results) {
+        if ( ! error ) {
+            res.render("add",{
+                authenticated: true,
+                info: books,
+                results: results
+            });    
+        }
+        else {
+            console.log(error);
+        }
+    });
 });
 module.exports = router;
