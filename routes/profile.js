@@ -8,6 +8,7 @@ var requestedBooks = [];
 var requestes = [];
 var borrowed = [];
 var lent = [];
+var profile = [];
 
 var options = {
     limit: 40
@@ -15,6 +16,21 @@ var options = {
 
 router.get('/', function (req, res) {
     if (req.session && req.session.user) { 
+        User.find({username: req.session.user.username}, function(err, user){
+            if(err){
+                console.log(err)
+            }
+            profile = [];
+            for(var i = 0; i < user.length; i++){
+                profile.push({
+                    username: user[i].username,
+                    password: user[i].password,
+                    email: user[i].email,
+                    location: user[i].location
+                });
+            }
+            profile = profile.filter(Boolean);
+        })
         //Get my books
         Book.find({ owner: req.session.user.username || req.session.user }, function(err, books){
             if(err){
@@ -109,7 +125,8 @@ router.get('/', function (req, res) {
                 requested: requestedBooks,
                 requests: requestes,
                 borrowed: borrowed,
-                lent: lent
+                lent: lent,
+                profile: profile
             });
         })
         
@@ -160,7 +177,8 @@ router.delete('/', function (req, res) {
         requested: requestedBooks,
         requests: requestes,
         borrowed: borrowed,
-        lent: lent
+        lent: lent,
+        profile: profile
     });
 });
 module.exports = router;

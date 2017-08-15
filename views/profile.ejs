@@ -4,8 +4,27 @@
     <h1 id="eachTitle">MY PROFILE</h1>
 </div>
 <div class="ui container">
-    <div class="">
-        
+    <div class="profile-menu">
+        <% for(var i = 0; i < profile.length; i++){ %>
+            <h1 style="display: inline"> <%=profile[i].username%></h1> <button class="change">Change</button><br>
+            <i aria-hidden="true" class='open envelope icon'></i> <h3 style="display: inline"> <%=profile[i].email%></h3><br>
+            <i aria-hidden="true" class='marker icon'></i> <h3 style="display: inline"> <%=profile[i].location%></h3><br>
+            <div id="modaldiv" class="ui modal" style="position: relative">
+                <form method = "POST" action="">
+                    <i class="close icon"></i>
+                    <div class="header">Username: <input value="<%=profile[i].username%>"></input></div>
+                    <div class="content">Password: <input value="<%=profile[i].password%>"></input><br>Location: <input value="<%=profile[i].location%>"></input></div>
+                    <div class="actions">
+                        <div class="ui button">
+                            Cancel
+                        </div>
+                        <div class="ui button">
+                            Ok
+                        </div>
+                    </div>
+                </form>
+            </div><!-- Should be out side of the book info div -->
+        <% } %>
     </div>
     <div class="ui top attached tabular menu">
         <a class="item active" data-tab="mine"><%=info.length%> My Books</a>
@@ -163,7 +182,7 @@ crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
   <script type="text/javascript">
   $(document).ready(function(){
-    $(document).on('click', '#detail', function(){
+    $(document).on('click', '.change', function(){
         $('.ui.modal').modal({
             blurring: true
           }).modal('show');
