@@ -77,7 +77,6 @@ router.get('/', function (req, res) {
     }
 });
 router.delete('/', function (req, res) {
-    console.log(req.headers);
     if(req.headers.book !== ""){
         Book.remove({owner: req.session.user.username, title: req.headers.book}, function(err){
             if(err){
@@ -85,12 +84,19 @@ router.delete('/', function (req, res) {
             }
         });
     }
-    
-    res.render("profile",{
-        authenticated: true,
-        info: myBooks,
-        requested: requestedBooks,
-        requests: requestes
-    });
+    if(req.headers.requested !== ""){
+        Book.findOneAndUpdate({title: req.headers.requested, status: "requested"},
+        {$set:{'requestedBy': "", 'status': ""}}, {new: true}, function(err){
+            if(err){
+                console.log(err);
+            }
+        })
+    }
+res.render("profile",{
+                authenticated: true,
+                info: myBooks,
+                requested: requestedBooks,
+                requests: requestes
+            });
 });
 module.exports = router;
