@@ -7,6 +7,7 @@ var myBooks = [];
 var requestedBooks = [];
 var requestes = [];
 var borrowed = [];
+var lent = [];
 
 var options = {
     limit: 40
@@ -33,7 +34,7 @@ router.get('/', function (req, res) {
             myBooks = myBooks.filter(Boolean);
         });
         //Get requested books
-        Book.find({ requestedBy: req.session.user.username || req.session.user }, function(err, books){
+        Book.find({ requestedBy: req.session.user.username, status: "requested" }, function(err, books){
             if(err){
                 console.log(err);
             }
@@ -69,7 +70,7 @@ router.get('/', function (req, res) {
             requestes = requestes.filter(Boolean);
         });
         //Get borrowed books
-        Book.find({"borrowedBy": req.session.user.username}, function(err, books){
+        Book.find({"requestedBy": req.session.user.username, status: "borrowed"}, function(err, books){
             if(err){
                 console.log(err)
             }
@@ -85,12 +86,30 @@ router.get('/', function (req, res) {
                 })
             }
             borrowed = borrowed.filter(Boolean);
+        });
+        Book.find({owner: req.session.user.username, status: "borrowed"}, function(err, books){
+            if(err){
+                console.log(err);
+            }
+            lent = [];
+            for(var i = 0; i < books.length; i++){
+                lent.push({
+                    thumbnail: books[i].thumbnail,
+                    title: books[i].title,
+                    author: books[i].author,
+                    publishedDate: books[i].publishedDate,
+                    pageCount: books[i].pageCount,
+                    description: books[i].description
+                })
+            }
+            lent = lent.filter(Boolean);
             res.render("profile",{
                 authenticated: true,
                 info: myBooks,
                 requested: requestedBooks,
                 requests: requestes,
-                borrowed: borrowed
+                borrowed: borrowed,
+                lent: lent
             });
         })
         
@@ -120,7 +139,16 @@ router.delete('/', function (req, res) {
     //Allow others to borrow
     if(req.headers.allow !== ""){
         Book.findOneAndUpdate({title: req.headers.allow, status: "requested"},
-        {$set: {'requestedBy': "", 'status': "borrowed", 'borrowedBy': req.session.user.username}}, {new: true}, function(err){
+        {$set: {'status': "borrowed"}}, {new: true}, function(err){
+            if(err){
+                console.log(err);
+            }
+        })
+    }
+    //return and take back
+    if(req.headers.return !== ""){
+        Book.findOneAndUpdate({title: req.headers.return, status: "borrowed"},
+        {$set: {'status': "", 'requestedBy': ""}}, {new: true}, function(err){
             if(err){
                 console.log(err);
             }
@@ -130,7 +158,9 @@ router.delete('/', function (req, res) {
         authenticated: true,
         info: myBooks,
         requested: requestedBooks,
-        requests: requestes
+        requests: requestes,
+        borrowed: borrowed,
+        lent: lent
     });
 });
 module.exports = router;

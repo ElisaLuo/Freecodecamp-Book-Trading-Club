@@ -10,7 +10,6 @@ const bookSchema = new Schema({
     description: { type: String },
     owner: { type: String },
     requestedBy: { type: String, default: ''},
-    borrowedBy: { type: String, default: ''},
     status: { type: String, default: ''}
 });
 

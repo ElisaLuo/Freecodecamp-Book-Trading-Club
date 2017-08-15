@@ -12,7 +12,7 @@
         <a class="item" data-tab="requested"><%=requested.length%> Requested Books</a>
         <a class="item" data-tab="borrowed"><%=borrowed.length%> Borrowed Books</a>
         <a class="item" data-tab="requestes"><%=requests.length%> Requests For You</a>
-        <a class="item" data-tab="lent">Lent Books</a>
+        <a class="item" data-tab="lent"><%=lent.length%> Lent Books</a>
     </div>
     <div class="ui bottom attached tab segment active" data-tab="mine">
         <% for(var i = 0; i < info.length; i++){ %>
@@ -127,7 +127,31 @@
         <% } %>
     </div>
     <div class="ui bottom attached tab segment" data-tab="lent">
-        This is some text
+        <% for(var i = 0; i < lent.length; i++){ %>
+        <div class="ui grid">
+            <div class="column four wide">
+                <div class="ui card">
+                    <div class="image">
+                        <input value="<%= lent[i].thumbnail %>" name="image" style="display: none">
+                        <img src = "<%= lent[i].thumbnail %>"/>
+                    </div>
+                    <div class="content">
+                        <div class="header">
+                            <input class="ui small header title" value="<%= lent[i].title %>" readonly name="title">
+                        </div>
+                        <div class="meta">
+                            <div class="des">Author:<input class="desc" value="<%= lent[i].author %>" readonly name="author"></div><br>
+                            <div class="des">Published on:<input class="desc" value="<%= lent[i].publishedDate %>" readonly name="date"></div><br>
+                            <div class="des">Pages:<input class="desc" value="<%= lent[i].pageCount %>" readonly name="pages"></div><br>
+                        </div>
+                    </div>
+                    <div class="content extra">
+                        <button class="take-back ui button basic red fluid" id="<%= lent[i].title %>">Take Back</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
     </div>
     
 </div>
@@ -146,7 +170,7 @@ crossorigin="anonymous"></script>
     });
     $('.top.menu .item').tab();
     $('.delete').click(function(){
-            if(confirm('Are you sure you want to delete this book')){
+        location.reload();
             $.ajax({
                 url: '/profile',
                 type: 'DELETE',
@@ -157,13 +181,11 @@ crossorigin="anonymous"></script>
                     location.reload();
                     location.reload();
                     location.reload();
-                    alert("Book removed");
                 }
             });
-        }
     });
     $('.delete-request').click(function(){
-            if(confirm('Are you sure you want to delete the request of this book')){
+        location.reload();
             $.ajax({
                 url: '/profile',
                 type: 'DELETE',
@@ -174,13 +196,11 @@ crossorigin="anonymous"></script>
                     location.reload();
                     location.reload();
                     location.reload();
-                    alert("Request removed");
                 }
             });
-        }
     });
     $('.ignore').click(function(){
-            if(confirm('Are you sure you want to ignore this request')){
+        location.reload();
             $.ajax({
                 url: '/profile',
                 type: 'DELETE',
@@ -191,13 +211,11 @@ crossorigin="anonymous"></script>
                     location.reload();
                     location.reload();
                     location.reload();
-                    alert("Request ignored");
                 }
             });
-        }
     });
     $('.allow').click(function(){
-            if(confirm('Are you sure you want to allow this request')){
+        location.reload();
             $.ajax({
                 url: '/profile',
                 type: 'DELETE',
@@ -208,13 +226,11 @@ crossorigin="anonymous"></script>
                     location.reload();
                     location.reload();
                     location.reload();
-                    alert("Request allowed");
                 }
             });
-        }
     });
     $('.return').click(function(){
-            if(confirm('Are you sure you want to return this book')){
+        location.reload();
             $.ajax({
                 url: '/profile',
                 type: 'DELETE',
@@ -225,10 +241,23 @@ crossorigin="anonymous"></script>
                     location.reload();
                     location.reload();
                     location.reload();
-                    alert("Book returned");
                 }
             });
-        }
+    });
+    $('.take-back').click(function(){
+        location.reload();
+            $.ajax({
+                url: '/profile',
+                type: 'DELETE',
+                headers: {
+                    "return": $(this).attr("id")
+                },
+                success: function(result){
+                    location.reload();
+                    location.reload();
+                    location.reload();
+                }
+            });
     });
 })
   </script>
