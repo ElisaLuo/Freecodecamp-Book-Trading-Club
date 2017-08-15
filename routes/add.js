@@ -24,10 +24,8 @@ router.get('/', function (req, res) {
 router.post("/", function(req,res){
     term.push(req.body.search);
     term = term.filter(Boolean);
-    console.log(req.body.title == undefined);
     if(req.body.title == undefined){
         console.log("a");
-        
     }else{
         const newBook = new Book({
             thumbnail: req.body.image,
@@ -35,7 +33,7 @@ router.post("/", function(req,res){
             author: req.body.author,
             publishedDate: req.body.date,
             pageCount: req.body.pages,
-            description: req.body.description,
+            link: req.body.description,
             owner: req.session.user.username
         }).save(function (err, poll) {
             if (err) throw err;

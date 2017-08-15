@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="content extra">
-                        <button class="detail ui button basic fluid" id="<%= info[i].title %>">View Details</button>
+                        <a href="<%= info[i].link %>" target="_blank" class="detail ui button basic fluid">View Details</a>
                         <button class="delete ui button basic red fluid" id="<%= info[i].title %>">Delete</button>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                         </div>
                     </div>
                     <div class="content extra">
-                        <button class="detail ui button basic fluid" id="<%= requested[i].title %>">View Detail</button>
+                        <a href="<%= requested[i].link %>" target="_blank" class="detail ui button basic fluid">View Details</a>
                         <button class="delete-request ui button basic red fluid" id="<%= requested[i].title %>">Delete Request</button>
                     </div>
                 </div>
@@ -90,7 +90,7 @@
                         </div>
                     </div>
                     <div class="content extra">
-                        <button class="detail ui button basic fluid" id="<%= borrowed[i].title %>">View Detail</button>
+                        <a href="<%= borrowed[i].link %>" target="_blank" class="detail ui button basic fluid">View Details</a>
                         <button class="return ui button basic blue fluid" id="<%= borrowed[i].title %>">Return</button>
                     </div>
                 </div>

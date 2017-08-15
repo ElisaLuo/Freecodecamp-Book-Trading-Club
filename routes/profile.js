@@ -28,7 +28,7 @@ router.get('/', function (req, res) {
                     author: books[i].author,
                     publishedDate: books[i].publishedDate,
                     pageCount: books[i].pageCount,
-                    description: books[i].description,
+                    link: books[i].link,
                 });
             }
             myBooks = myBooks.filter(Boolean);
@@ -46,7 +46,7 @@ router.get('/', function (req, res) {
                     author: books[i].author,
                     publishedDate: books[i].publishedDate,
                     pageCount: books[i].pageCount,
-                    description: books[i].description
+                    link: books[i].link
                 });
             }
             requestedBooks = requestedBooks.filter(Boolean);
@@ -64,7 +64,7 @@ router.get('/', function (req, res) {
                     author: books[i].author,
                     publishedDate: books[i].publishedDate,
                     pageCount: books[i].pageCount,
-                    description: books[i].description
+                    link: books[i].link
                 });
             }
             requestes = requestes.filter(Boolean);
@@ -82,7 +82,7 @@ router.get('/', function (req, res) {
                     author: books[i].author,
                     publishedDate: books[i].publishedDate,
                     pageCount: books[i].pageCount,
-                    description: books[i].description
+                    link: books[i].link
                 })
             }
             borrowed = borrowed.filter(Boolean);
@@ -99,7 +99,7 @@ router.get('/', function (req, res) {
                     author: books[i].author,
                     publishedDate: books[i].publishedDate,
                     pageCount: books[i].pageCount,
-                    description: books[i].description
+                    link: books[i].link
                 })
             }
             lent = lent.filter(Boolean);

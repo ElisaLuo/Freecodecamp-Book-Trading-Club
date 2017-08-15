@@ -8,25 +8,25 @@
         <div class="field">
             <div class="ui left icon input">
                 <i aria-hidden="true" class='user icon'></i>
-                <input required type="text" name="username" placeholder="Username" class="log" autofocus>
+                <input required type="text" name="username" placeholder="Username" class="log" autofocus minlength="3">
             </div>
         </div>
         <div class="field">
             <div class="ui left icon input">
                 <i aria-hidden="true" class='lock icon'></i>
-                <input required type="text" name="password" placeholder="Password" class="log">
+                <input required type="text" name="password" placeholder="Password" class="log" minlength="6" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Your password has to consist of atleast one uppercase and one numerical character with a minimum length of 6 characters">
             </div>
         </div>
         <div class="field">
             <div class="ui left icon input">
                 <i aria-hidden="true" class='open envelope icon'></i>
-                <input required type="text" name="email" placeholder="Email" class="log">
+                <input required type="text" name="email" placeholder="Email" class="log" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="Your email is invalid">
             </div>
         </div>
         <div class="field">
             <div class="ui left icon input">
                 <i aria-hidden="true" class='marker icon'></i>
-                <input required type="text" name="place" placeholder="Location" class="log">
+                <input required type="text" name="place" placeholder="Location" class="log" required>
             </div>
         </div>
         <div class="field">
