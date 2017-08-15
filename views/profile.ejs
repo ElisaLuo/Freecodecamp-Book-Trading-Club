@@ -8,10 +8,10 @@
         
     </div>
     <div class="ui top attached tabular menu">
-        <a class="item active" data-tab="mine">My Books</a>
-        <a class="item" data-tab="requested">Requested Books</a>
-        <a class="item" data-tab="borrowed">Borrowed Books</a>
-        <a class="item" data-tab="requestes">Requestes For You</a>
+        <a class="item active" data-tab="mine"><%=info.length%> My Books</a>
+        <a class="item" data-tab="requested"><%=requested.length%> Requested Books</a>
+        <a class="item" data-tab="borrowed"><%=borrowed.length%> Borrowed Books</a>
+        <a class="item" data-tab="requestes"><%=requests.length%> Requests For You</a>
         <a class="item" data-tab="lent">Lent Books</a>
     </div>
     <div class="ui bottom attached tab segment active" data-tab="mine">
@@ -71,7 +71,32 @@
         <% } %>
     </div>
     <div class="ui bottom attached tab segment" data-tab="borrowed">
-        This is some text
+        <% for(var i = 0; i < borrowed.length; i++){ %>
+        <div class="ui grid">
+            <div class="column four wide">
+                <div class="ui card">
+                    <div class="image">
+                        <input value="<%= borrowed[i].thumbnail %>" name="image" style="display: none">
+                        <img src = "<%= borrowed[i].thumbnail %>"/>
+                    </div>
+                    <div class="content">
+                        <div class="header">
+                            <input class="ui small header title" value="<%= borrowed[i].title %>" readonly name="title">
+                        </div>
+                        <div class="meta">
+                            <div class="des">Author:<input class="desc" value="<%= borrowed[i].author %>" readonly name="author"></div><br>
+                            <div class="des">Published on:<input class="desc" value="<%= borrowed[i].publishedDate %>" readonly name="date"></div><br>
+                            <div class="des">Pages:<input class="desc" value="<%= borrowed[i].pageCount %>" readonly name="pages"></div><br>
+                        </div>
+                    </div>
+                    <div class="content extra">
+                        <button class="detail ui button basic fluid" id="<%= borrowed[i].title %>">View Detail</button>
+                        <button class="return ui button basic blue fluid" id="<%= borrowed[i].title %>">Return</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
     </div>
     <div class="ui bottom attached tab segment" data-tab="requestes">
         <% for(var i = 0; i < requests.length; i++){ %>
@@ -129,10 +154,10 @@ crossorigin="anonymous"></script>
                     "Book": $(this).attr("id")
                 },
                 success: function(result){
+                    location.reload();
+                    location.reload();
+                    location.reload();
                     alert("Book removed");
-                    location.reload();
-                    location.reload();
-                    location.reload();
                 }
             });
         }
@@ -167,6 +192,40 @@ crossorigin="anonymous"></script>
                     location.reload();
                     location.reload();
                     alert("Request ignored");
+                }
+            });
+        }
+    });
+    $('.allow').click(function(){
+            if(confirm('Are you sure you want to allow this request')){
+            $.ajax({
+                url: '/profile',
+                type: 'DELETE',
+                headers: {
+                    "allow": $(this).attr("id")
+                },
+                success: function(result){
+                    location.reload();
+                    location.reload();
+                    location.reload();
+                    alert("Request allowed");
+                }
+            });
+        }
+    });
+    $('.return').click(function(){
+            if(confirm('Are you sure you want to return this book')){
+            $.ajax({
+                url: '/profile',
+                type: 'DELETE',
+                headers: {
+                    "return": $(this).attr("id")
+                },
+                success: function(result){
+                    location.reload();
+                    location.reload();
+                    location.reload();
+                    alert("Book returned");
                 }
             });
         }
