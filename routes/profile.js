@@ -13,9 +13,17 @@ var profile = [];
 var options = {
     limit: 40
 };
-
+function titleCase(str) {
+    var rawString = str.toLowerCase().split(" ");
+        var upperCase = [];
+        for(var i = 0; i < rawString.length; i++){
+            upperCase.push(rawString[i][0].toUpperCase() + rawString[i].substring(1, rawString[i].length));
+        }
+        return upperCase.join(" ");
+}
 router.get('/', function (req, res) {
     if (req.session && req.session.user) { 
+        //Get user info
         User.find({username: req.session.user.username}, function(err, user){
             if(err){
                 console.log(err)
@@ -26,7 +34,7 @@ router.get('/', function (req, res) {
                     username: user[i].username,
                     password: user[i].password,
                     email: user[i].email,
-                    location: user[i].location
+                    location: titleCase(user[i].location)
                 });
             }
             profile = profile.filter(Boolean);

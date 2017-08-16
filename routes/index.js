@@ -16,16 +16,4 @@ router.get('/', function (req, res) {
 
 });
 
-/*var options = {
-    limit: 40
-};
-
-books.search("Professional JavaScript for Web Developers", options, function(error, results, apiResponse) {
-    if ( ! error ) {
-        console.log(results);
-    } else {
-        console.log(error);
-    }
-});*/
-
 module.exports = router;
