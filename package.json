@@ -1,0 +1,36 @@
+{
+  "name": "book-station",
+  "version": "1.0.0",
+  "description": "An application which allows users to trade books between each other",
+  "main": "server.js",
+  "dependencies": {
+    "ejs": "^2.5.7",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "google-books-search": "^0.3.1",
+    "client-sessions": "^0.8.0",
+    "mongoose": "^4.8.2",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ElisaLuo/Freecodecamp-Book-Trading-Club.git"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "google-books",
+    "mongoose"
+  ],
+  "author": "ElisaLuo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ElisaLuo/Freecodecamp-Book-Trading-Club/issues"
+  },
+  "homepage": "https://github.com/ElisaLuo/Freecodecamp-Book-Trading-Club#readme"
+}
