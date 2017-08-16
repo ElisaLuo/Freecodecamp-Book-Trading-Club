@@ -135,6 +135,25 @@ router.get('/', function (req, res) {
         res.status(401).send('You must be logged in to access this page');
     }
 });
+router.post('/', function(req, res){
+    User.findOneAndUpdate({username: req.session.user.username}, 
+    {$set: {
+        password: req.body.password, 
+        email: req.body.email, 
+        location: req.body.location
+    }}, {new: true}, function(err){
+        console.log(err);
+    })
+    res.render("profile",{
+        authenticated: true,
+        info: myBooks,
+        requested: requestedBooks,
+        requests: requestes,
+        borrowed: borrowed,
+        lent: lent,
+        profile: profile
+    });
+})
 router.delete('/', function (req, res) {
     //My book delete 
     if(req.headers.book !== ""){

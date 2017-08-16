@@ -6,23 +6,26 @@
 <div class="ui container">
     <div class="profile-menu">
         <% for(var i = 0; i < profile.length; i++){ %>
-            <h1 style="display: inline"> <%=profile[i].username%></h1> <button class="change">Change</button><br>
+            <h1 style="display: inline"> <%=profile[i].username%></h1> <button class="change"><i aria-hidden="true" class='edit icon'><h4 style="display: inline">Edit</h4></i></button><br>
             <i aria-hidden="true" class='open envelope icon'></i> <h3 style="display: inline"> <%=profile[i].email%></h3><br>
             <i aria-hidden="true" class='marker icon'></i> <h3 style="display: inline"> <%=profile[i].location%></h3><br>
             <div id="modaldiv" class="ui modal" style="position: relative">
-                <form method = "POST" action="">
-                    <i class="close icon"></i>
-                    <div class="header">Username: <input value="<%=profile[i].username%>"></input></div>
-                    <div class="content">Password: <input value="<%=profile[i].password%>"></input><br>Location: <input value="<%=profile[i].location%>"></input></div>
-                    <div class="actions">
-                        <div class="ui button">
-                            Cancel
-                        </div>
-                        <div class="ui button">
-                            Ok
-                        </div>
+                <div class="header">Edit your information</div>
+                <div class="content">
+                    <h1><%=profile[i].username%></h1>
+                    <hr>
+                    <h4 class="change-title">Password</h4> <br><input value="<%=profile[i].password%>" id="password" class="change-box"></input><br>
+                    <h4 class="change-title">Email</h4> <br><input value="<%=profile[i].email%>" id="email" class="change-box"></input><br>
+                    <h4 class="change-title">Location</h4> <br><input value="<%=profile[i].location%>" id="location" class="change-box"></input>
+                </div>
+                <div class="actions">
+                    <div class="cancel ui button basic gray">
+                        Cancel
                     </div>
-                </form>
+                    <div class="ok ui button basic green">
+                        Ok
+                    </div>
+                </div>
             </div><!-- Should be out side of the book info div -->
         <% } %>
     </div>
@@ -182,12 +185,51 @@ crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
   <script type="text/javascript">
   $(document).ready(function(){
+      var pattern = new RegExp("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$");
+      var pass = new RegExp("^(?=.*[A-Z])(?=.*[a-z])(?=.*?[0-9]).{6,}$");
     $(document).on('click', '.change', function(){
         $('.ui.modal').modal({
             blurring: true
-          }).modal('show');
+          }).modal('show').modal('refresh');
     });
+    $(document).on('click', '.cancel', function(){
+        $('ui.modal').modal({
+            blurring: true
+        }).modal("hide")
+    })
     $('.top.menu .item').tab();
+    $('.ok').click(function(){
+        if(pattern.test($("#email").val()) && pass.test($("#password").val()) && $("#location").val().length > 0){
+            $.ajax({
+                url: '/profile',
+                type: 'POST',
+                data: {
+                    password: $("#password").val(),
+                    email: $("#email").val(),
+                    location: $("#location").val()
+                },
+                success: function(result){
+                    location.reload();
+                    alert("Your profile is changed")
+                }
+            });
+        }else if(pattern.test($("#email").val()) == false && pass.test($("#password").val()) && $("#location").val().length > 0){
+            alert("Your email is invalid")
+        }
+        else if(pass.test($("#password").val()) == false && pattern.test($("#email").val()) && $("#location").val().length > 0){
+            alert("Your password has to consist of at least one uppercase and one numerical character with a minimum length of 6 characters")
+        }
+        else if(pass.test($("#password").val()) && pattern.test($("#email").val()) && $("#location").val().length == 0){
+            alert("Your location is required")
+        }
+        else if(pattern.test($("#email").val()) == false && pass.test($("#password").val()) == false && $("#location").val().length > 0){
+            alert("Your password and email are invalid")
+        }
+        else if(pattern.test($("#email").val()) == false && pass.test($("#password").val()) == false && $("#location").val().length == 0){
+            alert("Your password, location and email are invalid")
+        }
+        
+    });
     $('.delete').click(function(){
         location.reload();
             $.ajax({
