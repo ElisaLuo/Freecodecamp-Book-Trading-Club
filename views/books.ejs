@@ -23,10 +23,15 @@
                             <div class="des">Published on:<input class="desc" value="<%= info[i].publishedDate %>" readonly name="date"></div><br>
                             <div class="des">Pages:<input class="desc" value="<%= info[i].pageCount %>" readonly name="pages"></div><br>
                             <div class="des">Rating:<input class="desc" value="<%= info[i].rating %>" readonly name="pages"  style="display: none">
-                            <div class="star-ratings-css">
+                            <% if(info[i].rating == undefined){ %>
+                                N/A
+                            <% }else{ %>
+                                <%= info[i].rating %>
+                                <div class="star-ratings-css">
                                     <div class="star-ratings-css-top" style="width: <%= info[i].rating * 26.5 + "%" %>"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
                                     <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-                                </div></div><br>
+                                </div>
+                            <% } %></div><br>
                         </div>
                     </div>
                     <div class="content extra">
