@@ -18,7 +18,8 @@ router.get('/', function (req, res) {
                     author: books[i].author,
                     publishedDate: books[i].publishedDate,
                     pageCount: books[i].pageCount,
-                    link: books[i].link,
+                    description: books[i].description,
+                    rating: books[i].rating
                 });
             }
             res.render('books', {
@@ -37,7 +38,8 @@ router.get('/', function (req, res) {
                     author: books[i].author,
                     publishedDate: books[i].publishedDate,
                     pageCount: books[i].pageCount,
-                    link: books[i].link
+                    description: books[i].description,
+                    rating: books[i].rating
                 });
             }
             res.render('books', {
@@ -70,7 +72,8 @@ router.post("/", function(req, res){
                     author: books[i].author,
                     publishedDate: books[i].publishedDate,
                     pageCount: books[i].pageCount,
-                    link: books[i].link
+                    description: books[i].description,
+                    rating: books[i].rating
                 });
             }
             res.render('books', {

@@ -34,26 +34,51 @@ crossorigin="anonymous"></script>
                             <div class="des">Author:<input class="desc" value="<%= results[i].authors %>" readonly name="author"></div><br>
                             <div class="des">Published on:<input class="desc" value="<%= results[i].publishedDate %>" readonly name="date"></div><br>
                             <div class="des">Pages:<input class="desc" value="<%= results[i].pageCount %>" readonly name="pages"></div><br>
+                            <div class="des">Rating:<input class="desc" value="<%= results[i].averageRating %>" readonly name="rating" style="display: none">
+                                <div class="star-ratings-css">
+                                    <div class="star-ratings-css-top" style="width: <%= results[i].averageRating * 26.5 + "%" %>"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                                    <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                                </div>
+                            </div><br>
                         </div>
                     </div>
+                    <div id="modaldiv" class="ui modal <%= results[i].title%> <%= i %>" style="position: relative">
+                            <i class="close icon"></i>
+                            <div class="header"><%=results[i].title%></div>
+                            <div class="content">
+                                <input value="<%= results[i].description%>" readonly style="display: none" name=description>
+                                <%= results[i].description%>
+                            </div>
+                        </div><!-- Should be out side of the book info div -->
                     <div class="content extra">
-                        <a href="<%= results[i].link %>" target="_blank" class="ui button basic fluid">View Detail</a>
+                        <a class="ui button basic fluid detail" id="<%= results[i].title%> <%= i %>">View Detail</a>
                         <button class="add ui button basic fluid" type="submit" name="button" id="<%= results[i].title %>">Add</button>
                     </div>
                 </div>
             </div>
         </div>
-    
-        <div id="modaldiv" class="ui modal" style="position: relative">
-            <i class="close icon"></i>
-            <div class="header"><%=results[i].title%></div>
-            <div class="content"><input value="<%= results[i].link %>" readonly name=description></div>
-        </div><!-- Should be out side of the book info div -->
     </form>
     <% } %>
     
 </div>
     <% include footer.ejs%>
+    <script
+src="https://code.jquery.com/jquery-3.2.1.js"
+integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+  <script type="text/javascript">
+      $(document).ready(function(){
+          var bookName;
+          $('.detail').click( function(){
+              bookName=$(this).attr("id");
+              bookName = bookName.split(" ").join(".");
+              //alert(bookName);
+              //alert($(this).attr("id"));
+              $(".ui.modal." + bookName).modal("show");
+          })
+      })
+  </script>
   </body>
 </html>
 

@@ -52,7 +52,8 @@ router.get('/', function (req, res) {
                     author: books[i].author,
                     publishedDate: books[i].publishedDate,
                     pageCount: books[i].pageCount,
-                    link: books[i].link,
+                    description: books[i].description,
+                    rating: books[i].rating
                 });
             }
             myBooks = myBooks.filter(Boolean);
@@ -70,7 +71,8 @@ router.get('/', function (req, res) {
                     author: books[i].author,
                     publishedDate: books[i].publishedDate,
                     pageCount: books[i].pageCount,
-                    link: books[i].link
+                    description: books[i].description,
+                    rating: books[i].rating
                 });
             }
             requestedBooks = requestedBooks.filter(Boolean);
@@ -88,7 +90,8 @@ router.get('/', function (req, res) {
                     author: books[i].author,
                     publishedDate: books[i].publishedDate,
                     pageCount: books[i].pageCount,
-                    link: books[i].link
+                    description: books[i].description,
+                    rating: books[i].rating
                 });
             }
             requestes = requestes.filter(Boolean);
@@ -106,7 +109,8 @@ router.get('/', function (req, res) {
                     author: books[i].author,
                     publishedDate: books[i].publishedDate,
                     pageCount: books[i].pageCount,
-                    link: books[i].link
+                    description: books[i].description,
+                    rating: books[i].rating
                 })
             }
             borrowed = borrowed.filter(Boolean);
@@ -123,7 +127,8 @@ router.get('/', function (req, res) {
                     author: books[i].author,
                     publishedDate: books[i].publishedDate,
                     pageCount: books[i].pageCount,
-                    link: books[i].link
+                    description: books[i].description,
+                    rating: books[i].rating
                 })
             }
             lent = lent.filter(Boolean);

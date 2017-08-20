@@ -33,7 +33,8 @@ router.post("/", function(req,res){
             author: req.body.author,
             publishedDate: req.body.date,
             pageCount: req.body.pages,
-            link: req.body.description,
+            description: req.body.description,
+            rating: req.body.rating,
             owner: req.session.user.username
         }).save(function (err, poll) {
             if (err) throw err;

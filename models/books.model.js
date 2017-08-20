@@ -7,7 +7,8 @@ const bookSchema = new Schema({
     author: { type: String },
     publishedDate: { type: String },
     pageCount: { type: String },
-    link: { type: String },
+    description: { type: String },
+    rating: {type: String},
     owner: { type: String },
     requestedBy: { type: String, default: ''},
     status: { type: String, default: ''}
