@@ -35,10 +35,15 @@ crossorigin="anonymous"></script>
                             <div class="des">Published on:<input class="desc" value="<%= results[i].publishedDate %>" readonly name="date"></div><br>
                             <div class="des">Pages:<input class="desc" value="<%= results[i].pageCount %>" readonly name="pages"></div><br>
                             <div class="des">Rating:<input class="desc" value="<%= results[i].averageRating %>" readonly name="rating" style="display: none">
+                            <% if(results[i].averageRating == undefined){ %>
+                                N/A
+                            <% }else{ %>
+                                <%= results[i].averageRating %>
                                 <div class="star-ratings-css">
                                     <div class="star-ratings-css-top" style="width: <%= results[i].averageRating * 26.5 + "%" %>"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
                                     <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
                                 </div>
+                            <% } %>
                             </div><br>
                         </div>
                     </div>

@@ -4,6 +4,7 @@ const router = express.Router();
 const User = require('../models/users.model');
 const Book = require('../models/books.model');
 var term = [];
+var bookss = [];
 
 var options = {
     limit: 40
