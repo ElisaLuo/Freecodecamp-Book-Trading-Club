@@ -54,7 +54,7 @@
                             <div class="des">Published on:<input class="desc" value="<%= info[i].publishedDate %>" readonly name="date"></div><br>
                             <div class="des">Pages:<input class="desc" value="<%= info[i].pageCount %>" readonly name="pages"></div><br>
                             <div class="des">Rating:<input class="desc" value="<%= info[i].rating %>"  style="display: none" readonly name="pages">
-                            <% if(info[i].rating == undefined){ %>
+                            <% if(info[i].rating == ""){ %>
                                 N/A
                             <% }else{ %>
                                 <%= info[i].rating %>
@@ -100,7 +100,7 @@
                             <div class="des">Published on:<input class="desc" value="<%= requested[i].publishedDate %>" readonly name="date"></div><br>
                             <div class="des">Pages:<input class="desc" value="<%= requested[i].pageCount %>" readonly name="pages"></div><br>
                             <div class="des">Rating:<input class="desc"  style="display: none" value="<%= requested[i].rating %>" readonly name="pages">
-                            <% if(requested[i].rating == undefined){ %>
+                            <% if(requested[i].rating == ""){ %>
                                 N/A
                             <% }else{ %>
                                 <%= requested[i].rating %>
@@ -146,7 +146,7 @@
                             <div class="des">Published on:<input class="desc" value="<%= borrowed[i].publishedDate %>" readonly name="date"></div><br>
                             <div class="des">Pages:<input class="desc" value="<%= borrowed[i].pageCount %>" readonly name="pages"></div><br>
                             <div class="des">Rating:<input class="desc"  style="display: none" value="<%= borrowed[i].rating %>" readonly name="pages">
-                            <% if(borrowed[i].rating == undefined){ %>
+                            <% if(borrowed[i].rating == ""){ %>
                                 N/A
                             <% }else{ %>
                                 <%= borrowed[i].rating %>
@@ -192,7 +192,7 @@
                             <div class="des">Published on:<input class="desc" value="<%= requests[i].publishedDate %>" readonly name="date"></div><br>
                             <div class="des">Pages:<input class="desc" value="<%= requests[i].pageCount %>" readonly name="pages"></div><br>
                             <div class="des">Rating:<input class="desc"  style="display: none" value="<%= requests[i].rating %>" readonly name="pages">
-                            <% if(requests[i].rating == undefined){ %>
+                            <% if(requests[i].rating == ""){ %>
                                 N/A
                             <% }else{ %>
                                 <%= requests[i].rating %>
@@ -230,7 +230,7 @@
                             <div class="des">Published on:<input class="desc" value="<%= lent[i].publishedDate %>" readonly name="date"></div><br>
                             <div class="des">Pages:<input class="desc" value="<%= lent[i].pageCount %>" readonly name="pages"></div><br>
                             <div class="des">Rating:<input class="desc"  style="display: none" value="<%= lent[i].rating %>" readonly name="pages">
-                            <% if(lent[i].rating == undefined){ %>
+                            <% if(lent[i].rating == ""){ %>
                                 N/A
                             <% }else{ %>
                                 <%= lent[i].rating %>
