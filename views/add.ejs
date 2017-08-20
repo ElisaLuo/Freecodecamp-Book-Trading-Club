@@ -78,8 +78,6 @@ crossorigin="anonymous"></script>
           $('.detail').click( function(){
               bookName=$(this).attr("id");
               bookName = bookName.split(" ").join(".");
-              //alert(bookName);
-              //alert($(this).attr("id"));
               $(".ui.modal." + bookName).modal("show");
           })
       })

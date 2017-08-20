@@ -34,8 +34,16 @@
                             <% } %></div><br>
                         </div>
                     </div>
+                    <div id="modaldiv" class="ui modal <%= info[i].title%> <%= i %>" style="position: relative">
+                            <i class="close icon"></i>
+                            <div class="header"><%=info[i].title%></div>
+                            <div class="content">
+                                <input value="<%= info[i].description%>" readonly style="display: none" name=description>
+                                <%= info[i].description%>
+                            </div>
+                        </div><!-- Should be out side of the book info div -->
                     <div class="content extra">
-                        <a class="detail ui basic button fluid" >View Detail</a>
+                        <a class="ui button basic fluid detail" id="<%= info[i].title%> <%= i %>">View Detail</a>
                         <% if(authenticated){ %>
                             <button class="add ui basic button fluid" type="submit" name="button" id="<%= info[i].title %>">Request</button>
                         <% } %>
@@ -54,3 +62,22 @@
 </div>
 
 <% include footer.ejs %>
+<script
+src="https://code.jquery.com/jquery-3.2.1.js"
+integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+  <script type="text/javascript">
+      $(document).ready(function(){
+          var bookName;
+          $('.detail').click( function(){
+              bookName=$(this).attr("id");
+              bookName = bookName.split(" ").join(".");
+              $(".ui.modal." + bookName).modal("show");
+          })
+      })
+  </script>
+  </body>
+</html>
+
+

@@ -65,8 +65,16 @@
                             <% } %></div><br>
                         </div>
                     </div>
+                    <div id="modaldiv" class="ui modal info <%= info[i].title%> <%= i %>" style="position: relative">
+                            <i class="close icon"></i>
+                            <div class="header"><%=info[i].title%></div>
+                            <div class="content">
+                                <input value="<%= info[i].description%>" readonly style="display: none" name=description>
+                                <%= info[i].description%>
+                            </div>
+                        </div><!-- Should be out side of the book info div -->
                     <div class="content extra">
-                        <a class="detail ui button basic fluid">View Details</a>
+                        <a class="ui button basic fluid detail" id="info <%= info[i].title%> <%= i %>">View Detail</a>
                         <button class="delete ui button basic red fluid" id="<%= info[i].title %>">Delete</button>
                     </div>
                 </div>
@@ -103,8 +111,16 @@
                             <% } %></div><br>
                         </div>
                     </div>
+                    <div id="modaldiv" class="ui modal requested <%= requested[i].title%> <%= i %>" style="position: relative">
+                            <i class="close icon"></i>
+                            <div class="header"><%=requested[i].title%></div>
+                            <div class="content">
+                                <input value="<%= requested[i].description%>" readonly style="display: none" name=description>
+                                <%= requested[i].description%>
+                            </div>
+                        </div><!-- Should be out side of the book info div -->
                     <div class="content extra">
-                        <a class="detail ui button basic fluid">View Details</a>
+                        <a class="ui button basic fluid detail" id="requested <%= requested[i].title%> <%= i %>">View Detail</a>
                         <button class="delete-request ui button basic red fluid" id="<%= requested[i].title %>">Delete Request</button>
                     </div>
                 </div>
@@ -141,8 +157,16 @@
                             <% } %></div><br>
                         </div>
                     </div>
+                    <div id="modaldiv" class="ui modal borrowed <%= borrowed[i].title%> <%= i %>" style="position: relative">
+                            <i class="close icon"></i>
+                            <div class="header"><%=borrowed[i].title%></div>
+                            <div class="content">
+                                <input value="<%= borrowed[i].description%>" readonly style="display: none" name=description>
+                                <%= results[i].description%>
+                            </div>
+                        </div><!-- Should be out side of the book info div -->
                     <div class="content extra">
-                        <a class="detail ui button basic fluid">View Details</a>
+                        <a class="ui button basic fluid detail" id="borrowed <%= borrowed[i].title%> <%= i %>">View Detail</a>
                         <button class="return ui button basic blue fluid" id="<%= borrowed[i].title %>">Return</button>
                     </div>
                 </div>
@@ -237,6 +261,12 @@ crossorigin="anonymous"></script>
   $(document).ready(function(){
       var pattern = new RegExp("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$");
       var pass = new RegExp("^(?=.*[A-Z])(?=.*[a-z])(?=.*?[0-9]).{6,}$");
+      var bookName;
+          $('.detail').click( function(){
+              bookName=$(this).attr("id");
+              bookName = bookName.split(" ").join(".");
+              $(".ui.modal." + bookName).modal("show");
+          })
     $(document).on('click', '.change', function(){
         $('.ui.modal').modal({
             blurring: true
