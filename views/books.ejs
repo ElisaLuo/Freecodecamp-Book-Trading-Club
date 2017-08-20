@@ -23,7 +23,7 @@
                             <div class="des">Published on:<input class="desc" value="<%= info[i].publishedDate %>" readonly name="date"></div><br>
                             <div class="des">Pages:<input class="desc" value="<%= info[i].pageCount %>" readonly name="pages"></div><br>
                             <div class="des">Rating:<input class="desc" value="<%= info[i].rating %>" readonly name="pages"  style="display: none">
-                            <% if(info[i].rating == undefined){ %>
+                            <% if(info[i].rating == ""){ %>
                                 N/A
                             <% }else{ %>
                                 <%= info[i].rating %>
