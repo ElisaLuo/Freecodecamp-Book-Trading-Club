@@ -15,7 +15,8 @@ router.get('/', function (req, res) {
         res.render("add",{
             authenticated: true,
             info: books,
-            results: {}
+            results: {},
+            user: req.session.user.username
         });
     }
     else{
@@ -46,7 +47,8 @@ router.post("/", function(req,res){
             res.render("add",{
                 authenticated: true,
                 info: books,
-                results: results
+                results: results,
+                user: req.session.user.username
             });    
         }
         else {

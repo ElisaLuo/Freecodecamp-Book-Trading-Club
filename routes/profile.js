@@ -139,7 +139,8 @@ router.get('/', function (req, res) {
                 requests: requestes,
                 borrowed: borrowed,
                 lent: lent,
-                profile: profile
+                profile: profile,
+                user: req.session.user.username
             });
         })
         
@@ -164,7 +165,8 @@ router.post('/', function(req, res){
         requests: requestes,
         borrowed: borrowed,
         lent: lent,
-        profile: profile
+        profile: profile,
+        user: req.session.user.username
     });
 })
 router.delete('/', function (req, res) {
@@ -210,7 +212,8 @@ router.delete('/', function (req, res) {
         requests: requestes,
         borrowed: borrowed,
         lent: lent,
-        profile: profile
+        profile: profile,
+        user: req.session.user.username
     });
 });
 module.exports = router;

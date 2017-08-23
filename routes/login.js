@@ -29,7 +29,8 @@ router.post('/', function (req, res) {
                 res.render('login', {
                     error: true,
                     authenticated: false,
-                    errorMessage: 'Incorrect login details'
+                    errorMessage: 'Incorrect login details',
+                    user: req.session.user.username
                 });
             }
         }

@@ -25,8 +25,15 @@
                         <ul class="nav navbar-nav navbar-right nav-tabs">
                             <li><a href="/books">Browse Books</a></li>
                             <li><a href="/add">Add Book</a></li>
-                            <li><a href="/profile">My Profile</a></li>
-                            <li><a href="/logout">Log Out</a></li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Hi <%= user %>
+                                <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/profile">My Profile</a></li>
+                                    <li><a href="/logout">Log Out</a></li>
+                                </ul>
+                            </li>
+                            
                         </ul>
                     </div>
                 <% } %>

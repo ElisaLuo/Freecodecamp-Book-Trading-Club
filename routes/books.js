@@ -24,7 +24,8 @@ router.get('/', function (req, res) {
             }
             res.render('books', {
                 authenticated: true,
-                info: bookInfo
+                info: bookInfo,
+                user: req.session.user.username
             })
         })
     }
@@ -46,6 +47,8 @@ router.get('/', function (req, res) {
                 authenticated: false,
                 info: bookInfo
             })
+            
+            
         })
     }
 });
@@ -78,7 +81,8 @@ router.post("/", function(req, res){
             }
             res.render('books', {
                 authenticated: true,
-                info: bookInfo
+                info: bookInfo,
+                user: req.session.user.username
             })
         })
 })
